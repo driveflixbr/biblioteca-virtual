@@ -732,7 +732,7 @@ function renderTitleList(items) {
       <h2 class="letter-heading">${letter}</h2>
       <div class="titles">
         ${groups[letter].map(item => `
-          <button class="title-item" data-link="${encodeURIComponent(item.link)}" data-title="${escapeAttr(item.title)}">
+          <button class="title-item" data-links='${encodeURIComponent(JSON.stringify(item.links))}' data-title="${escapeAttr(item.title)}">
             ${escapeHtml(item.title)}
           </button>
         `).join("")}
