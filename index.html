@@ -596,7 +596,7 @@ function renderBreadcrumb() {
   }
   if (state.type) {
     parts.push(`<span class="sep">/</span>`);
-    parts.push(`<span class="current">${state.type === "movies" ? "Movies" : "Series"}</span>`);
+    parts.push(`<span class="current">${state.type === "movies" ? "Filmes" : "Séries"}</span>`);
   }
   breadcrumb.innerHTML = parts.join("");
   breadcrumb.querySelectorAll(".crumb").forEach(el => {
