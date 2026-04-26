@@ -773,10 +773,17 @@ function goTitles(platformKey, type) {
 /* =========================================================
    MODAL
    ========================================================= */
-function openModal(title, link) {
-  currentLink = link;
+function openSourceModal(title, links) {
   modalTitle.textContent = title;
-  player.src = link;
+
+  // aqui você escolhe entre Drive e Telegram
+  const choice = confirm("OK = Drive | Cancel = Telegram");
+
+  const selectedLink = choice ? links.drive : links.telegram;
+
+  currentLink = selectedLink;
+  player.src = selectedLink;
+
   modal.classList.add("open");
   document.body.classList.add("modal-open");
 }
