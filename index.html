@@ -682,7 +682,7 @@ function renderTitles() {
   view.innerHTML = `
     <button class="back-btn" id="backBtn">← Voltar</button>
     <h1 class="page-title">${plat.name} — ${state.type === "movies" ? "Filmes" : "Séries"}</h1>
-    <p class="page-subtitle">${items.length} títulos${items.length === 1 ? "" : "s"} disponíveis.</p>
+    <p class="page-subtitle">${items.length} título${items.length === 1 ? "" : "s"} disponíveis.</p>
     <div id="titleArea"></div>
   `;
   app.appendChild(view);
