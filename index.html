@@ -447,71 +447,32 @@ const DATA = {
     name: "Netflix",
     movies: [
       {
-        title: "Avatar",
-        links: {
-          drive: "LINK_DRIVE_AVATAR",
-          telegram: "LINK_TELEGRAM_AVATAR"
-        }
-      },
-      {
-        title: "Avengers",
-        links: {
-          drive: "https://example.com/embed/avengers",
-          telegram: "https://example.com/embed/avengers"
-        }
-      },
-      {
-        title: "Batman",
-        links: {
-          drive: "https://example.com/embed/batman",
-          telegram: "https://example.com/embed/batman"
-        }
-      },
-      {
-        title: "Blade Runner 2049",
-        links: {
-          drive: "https://example.com/embed/blade-runner",
-          telegram: "https://example.com/embed/blade-runner"
-        }
-      },
-      {
-        title: "Dune",
-        links: {
-          drive: "https://example.com/embed/dune",
-          telegram: "https://example.com/embed/dune"
-        }
-      },
-      {
-        title: "Inception",
-        links: {
-          drive: "https://example.com/embed/inception",
-          telegram: "https://example.com/embed/inception"
-        }
-      },
-      {
-        title: "Interstellar",
-        links: {
-          drive: "https://example.com/embed/interstellar",
-          telegram: "https://example.com/embed/interstellar"
-        }
-      },
-      {
-        title: "The Irishman",
-        links: {
-          drive: "https://example.com/embed/irishman",
-          telegram: "https://example.com/embed/irishman"
-        }
-      },
-      {
-        title: "Roma",
-        links: {
-          drive: "https://example.com/embed/roma",
-          telegram: "https://example.com/embed/roma"
-        }
-      }
-    ]
+  title: "Avatar",
+  links: {
+    drive: "LINK_DRIVE",
+    telegram: "LINK_TELEGRAM"
   }
 },
+      { title: "Avengers", link: "https://example.com/embed/avengers" },
+      { title: "Batman", link: "https://example.com/embed/batman" },
+      { title: "Blade Runner 2049", link: "https://example.com/embed/blade-runner" },
+      { title: "Dune", link: "https://example.com/embed/dune" },
+      { title: "Inception", link: "https://example.com/embed/inception" },
+      { title: "Interstellar", link: "https://example.com/embed/interstellar" },
+      { title: "The Irishman", link: "https://example.com/embed/irishman" },
+      { title: "Roma", link: "https://example.com/embed/roma" }
+    ],
+    series: [
+      { title: "Black Mirror", link: "https://example.com/embed/black-mirror" },
+      { title: "Breaking Bad", link: "https://example.com/embed/breaking-bad" },
+      { title: "The Crown", link: "https://example.com/embed/the-crown" },
+      { title: "Dark", link: "https://example.com/embed/dark" },
+      { title: "Mindhunter", link: "https://example.com/embed/mindhunter" },
+      { title: "Ozark", link: "https://example.com/embed/ozark" },
+      { title: "Stranger Things", link: "https://example.com/embed/stranger-things" },
+      { title: "The Witcher", link: "https://example.com/embed/witcher" }
+    ]
+  },
   globoplay: {
     name: "Globoplay",
     movies: [
@@ -781,7 +742,7 @@ function renderTitleList(items) {
 
   area.querySelectorAll(".title-item").forEach(btn => {
     btn.addEventListener("click", () => {
-      openSourceModal(btn.dataset.title, JSON.parse(decodeURIComponent(btn.dataset.links)));
+      openModal(btn.dataset.title, decodeURIComponent(btn.dataset.link));
     });
   });
 }
@@ -812,17 +773,10 @@ function goTitles(platformKey, type) {
 /* =========================================================
    MODAL
    ========================================================= */
-function openSourceModal(title, links) {
+function openModal(title, link) {
+  currentLink = link;
   modalTitle.textContent = title;
-
-  // aqui você escolhe entre Drive e Telegram
-  const choice = confirm("OK = Drive | Cancel = Telegram");
-
-  const selectedLink = choice ? links.drive : links.telegram;
-
-  currentLink = selectedLink;
-  player.src = selectedLink;
-
+  player.src = link;
   modal.classList.add("open");
   document.body.classList.add("modal-open");
 }
