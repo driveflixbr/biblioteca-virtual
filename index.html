@@ -742,7 +742,7 @@ function renderTitleList(items) {
 
   area.querySelectorAll(".title-item").forEach(btn => {
     btn.addEventListener("click", () => {
-      openModal(btn.dataset.title, decodeURIComponent(btn.dataset.link));
+      openSourceModal(btn.dataset.title, JSON.parse(decodeURIComponent(btn.dataset.links)));
     });
   });
 }
