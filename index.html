@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DRIVEFLIX — Archive</title>
-<meta name="description" content="A lightweight, text-only streaming archive. Browse platforms, movies, and series." />
+<title>Streamverse — Arquivo</title>
+<meta name="description" content="Um arquivo de streaming leve, apenas em texto. Navegue por plataformas, filmes e séries." />
 <style>
   :root {
     --bg: #0b0b0b;
@@ -126,53 +126,6 @@
     font-size: 15px;
   }
 
-  /* Platform list */
-  .platform-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .platform-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: all var(--transition);
-    text-align: left;
-    width: 100%;
-    color: var(--text);
-    font-family: inherit;
-  }
-  .platform-card:hover {
-    background: var(--bg-elev-2);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-  .platform-card .name {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: .3px;
-  }
-  .platform-card .meta {
-    color: var(--text-mute);
-    font-size: 13px;
-  }
-  .platform-card .arrow {
-    color: var(--text-mute);
-    transition: transform var(--transition), color var(--transition);
-  }
-  .platform-card:hover .arrow {
-    color: var(--accent);
-    transform: translateX(4px);
-  }
-
   /* Type selector */
   .type-list {
     display: grid;
@@ -185,7 +138,7 @@
     background: var(--bg-elev);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 36px 24px;
+    padding: 42px 24px;
     cursor: pointer;
     text-align: center;
     transition: all var(--transition);
@@ -199,48 +152,95 @@
     box-shadow: var(--shadow);
   }
   .type-card .label {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .type-card .count {
     color: var(--text-mute);
-    font-size: 13px;
+    font-size: 14px;
   }
 
   /* Title list */
-  .letter-group { margin-bottom: 32px; }
+  .letter-group { margin-bottom: 36px; }
   .letter-heading {
-    font-size: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
     font-weight: 800;
-    color: var(--accent);
-    margin: 0 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    margin: 0 0 16px;
+    padding: 8px 16px 8px 14px;
+    background: linear-gradient(90deg, rgba(229,9,20,.18), rgba(229,9,20,0));
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .letter-heading .count-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-mute);
+    background: var(--bg-elev-2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: .5px;
   }
   .titles {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+    align-items: stretch;
   }
   .title-item {
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    padding: 10px 14px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
     cursor: pointer;
     color: var(--text);
-    font-size: 15px;
     text-align: left;
-    transition: all 150ms ease;
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1),
+                background 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease;
     font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 64px;
+  }
+  .title-item .t-name {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .title-item .t-meta {
+    font-size: 12px;
+    color: var(--text-mute);
+    font-weight: 500;
+    letter-spacing: .3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .title-item .t-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-mute);
+    display: inline-block;
   }
   .title-item:hover {
-    background: var(--bg-elev);
-    border-color: var(--border);
-    color: var(--accent);
-    padding-left: 18px;
+    background: var(--bg-elev-2);
+    border-color: var(--accent);
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 8px 24px rgba(229,9,20,.15);
   }
+  .title-item:hover .t-name { color: var(--accent); }
+  .title-item:hover .t-meta { color: var(--text-dim); }
 
   .empty-state {
     text-align: center;
@@ -334,11 +334,6 @@
     color: white;
     border-color: var(--accent);
   }
-  .icon-btn.copied {
-    background: #16a34a;
-    border-color: #16a34a;
-    color: white;
-  }
 
   .video-wrap {
     position: relative;
@@ -368,20 +363,96 @@
     .search-wrap { flex: 1; }
     main { padding: 24px 16px 60px; }
     .type-list { grid-template-columns: 1fr; }
-    .platform-card { padding: 18px 20px; }
-    .titles { grid-template-columns: 1fr; }
     .modal { padding: 0; }
     .modal-content { border-radius: 0; height: 100%; display: flex; flex-direction: column; }
     .video-wrap { flex: 1; aspect-ratio: auto; }
   }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--bg-elev-2); border-radius: 10px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  /* Source selection modal */
+  .source-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 150;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 180ms ease;
+  }
+  .source-modal.open { display: flex; }
+  .source-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px 24px 22px;
+    box-shadow: var(--shadow);
+    animation: sourcePop 220ms cubic-bezier(.2,.7,.2,1);
+    text-align: center;
+  }
+  @keyframes sourcePop {
+    from { transform: translateY(12px) scale(.96); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .source-eyebrow {
+    color: var(--text-mute);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 6px;
+  }
+  .source-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 18px;
+    color: var(--text);
+    word-break: break-word;
+  }
+  .source-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .source-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-elev-2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .source-btn:hover {
+    border-color: var(--accent);
+    background: #262626;
+    transform: translateY(-1px);
+  }
+  .source-btn.drive:hover { color: #4285f4; }
+  .source-btn.telegram:hover { color: #29b6f6; }
+  .source-cancel {
+    margin-top: 14px;
+    background: transparent;
+    border: none;
+    color: var(--text-mute);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color var(--transition);
+  }
+  .source-cancel:hover { color: var(--text); }
 
-  /* Toast */
   .toast {
     position: fixed;
     bottom: 24px;
@@ -404,28 +475,27 @@
   <header>
     <div class="header-inner">
       <div class="logo" id="logo">DRIVEFLIX<span>BR</span></div>
-      <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+      <nav class="breadcrumb" id="breadcrumb" aria-label="Navegação"></nav>
       <div class="search-wrap hidden" id="searchWrap">
         <span class="search-icon" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
         </span>
-        <input id="search" class="search-input" type="text" placeholder="Pesquisar..." aria-label="Search titles" />
+        <input id="search" class="search-input" type="text" placeholder="Pesquisar..." aria-label="Buscar títulos" />
       </div>
     </div>
   </header>
 
   <main id="app"></main>
 
-  <!-- Modal -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">Title</h3>
+        <h3 class="modal-title" id="modalTitle">Título</h3>
         <div class="modal-actions">
-          <button class="icon-btn" id="copyBtn" title="Copy link" aria-label="Copy video link">
+          <button class="icon-btn" id="copyBtn" title="Copiar link" aria-label="Copiar link do vídeo">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
           </button>
-          <button class="icon-btn" id="closeBtn" title="Close" aria-label="Close player">
+          <button class="icon-btn" id="closeBtn" title="Fechar" aria-label="Fechar player">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
           </button>
         </div>
@@ -436,130 +506,56 @@
     </div>
   </div>
 
-  <div class="toast" id="toast">Link copied</div>
+  <div class="source-modal" id="sourceModal" role="dialog" aria-modal="true" aria-labelledby="sourceTitle">
+    <div class="source-card">
+      <p class="source-eyebrow">Escolha a fonte</p>
+      <h3 class="source-title" id="sourceTitle">Título</h3>
+      <div class="source-buttons">
+        <button class="source-btn drive" id="sourceDrive">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="m4.93 10.93 4.24 4.24"/><path d="M2 18h6"/><path d="M16 18h6"/><path d="m14.83 15.17 4.24-4.24"/><path d="M8 22h8"/><circle cx="12" cy="14" r="2"/></svg>
+          Google Drive
+        </button>
+        <button class="source-btn telegram" id="sourceTelegram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg>
+          Telegram
+        </button>
+      </div>
+      <button class="source-cancel" id="sourceCancel">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Link copiado</div>
 
 <script>
 /* =========================================================
-   DATA — platform → type → titles (replace links freely)
+   DATA — Servidor Único
    ========================================================= */
-const DATA = {
-  netflix: {
-    name: "Netflix",
-    movies: [
-      {
-  title: "Avatar",
-  links: {
-    drive: "LINK_DRIVE",
-    telegram: "LINK_TELEGRAM"
-  }
-},
-      { title: "Avengers", link: "https://example.com/embed/avengers" },
-      { title: "Batman", link: "https://example.com/embed/batman" },
-      { title: "Blade Runner 2049", link: "https://example.com/embed/blade-runner" },
-      { title: "Dune", link: "https://example.com/embed/dune" },
-      { title: "Inception", link: "https://example.com/embed/inception" },
-      { title: "Interstellar", link: "https://example.com/embed/interstellar" },
-      { title: "The Irishman", link: "https://example.com/embed/irishman" },
-      { title: "Roma", link: "https://example.com/embed/roma" }
-    ],
-    series: [
-      { title: "Black Mirror", link: "https://example.com/embed/black-mirror" },
-      { title: "Breaking Bad", link: "https://example.com/embed/breaking-bad" },
-      { title: "The Crown", link: "https://example.com/embed/the-crown" },
-      { title: "Dark", link: "https://example.com/embed/dark" },
-      { title: "Mindhunter", link: "https://example.com/embed/mindhunter" },
-      { title: "Ozark", link: "https://example.com/embed/ozark" },
-      { title: "Stranger Things", link: "https://example.com/embed/stranger-things" },
-      { title: "The Witcher", link: "https://example.com/embed/witcher" }
-    ]
-  },
-  globoplay: {
-    name: "Globoplay",
-    movies: [
-      { title: "Bacurau", link: "https://example.com/embed/bacurau" },
-      { title: "Cidade de Deus", link: "https://example.com/embed/cidade-de-deus" },
-      { title: "Central do Brasil", link: "https://example.com/embed/central-do-brasil" },
-      { title: "Tropa de Elite", link: "https://example.com/embed/tropa-de-elite" }
-    ],
-    series: [
-      { title: "Aruanas", link: "https://example.com/embed/aruanas" },
-      { title: "Cine Holliúdy", link: "https://example.com/embed/cine-holliudy" },
-      { title: "Onde Está Meu Coração", link: "https://example.com/embed/onde-esta" },
-      { title: "Sob Pressão", link: "https://example.com/embed/sob-pressao" }
-    ]
-  },
-  hbomax: {
-    name: "HBO Max",
-    movies: [
-      { title: "Dune: Part Two", link: "https://example.com/embed/dune-2" },
-      { title: "The Matrix", link: "https://example.com/embed/matrix" },
-      { title: "Joker", link: "https://example.com/embed/joker" },
-      { title: "Oppenheimer", link: "https://example.com/embed/oppenheimer" }
-    ],
-    series: [
-      { title: "Chernobyl", link: "https://example.com/embed/chernobyl" },
-      { title: "Game of Thrones", link: "https://example.com/embed/got" },
-      { title: "House of the Dragon", link: "https://example.com/embed/hotd" },
-      { title: "Succession", link: "https://example.com/embed/succession" },
-      { title: "The Last of Us", link: "https://example.com/embed/last-of-us" },
-      { title: "True Detective", link: "https://example.com/embed/true-detective" }
-    ]
-  },
-  prime: {
-    name: "Prime Video",
-    movies: [
-      { title: "The Big Sick", link: "https://example.com/embed/big-sick" },
-      { title: "Manchester by the Sea", link: "https://example.com/embed/manchester" },
-      { title: "Sound of Metal", link: "https://example.com/embed/sound-of-metal" },
-      { title: "The Tomorrow War", link: "https://example.com/embed/tomorrow-war" }
-    ],
-    series: [
-      { title: "The Boys", link: "https://example.com/embed/the-boys" },
-      { title: "Fallout", link: "https://example.com/embed/fallout" },
-      { title: "Invincible", link: "https://example.com/embed/invincible" },
-      { title: "The Marvelous Mrs. Maisel", link: "https://example.com/embed/maisel" },
-      { title: "Reacher", link: "https://example.com/embed/reacher" }
-    ]
-  },
-  disney: {
-    name: "Disney+",
-    movies: [
-      { title: "Encanto", link: "https://example.com/embed/encanto" },
-      { title: "Inside Out 2", link: "https://example.com/embed/inside-out-2" },
-      { title: "Soul", link: "https://example.com/embed/soul" },
-      { title: "Turning Red", link: "https://example.com/embed/turning-red" }
-    ],
-    series: [
-      { title: "Andor", link: "https://example.com/embed/andor" },
-      { title: "Loki", link: "https://example.com/embed/loki" },
-      { title: "The Mandalorian", link: "https://example.com/embed/mandalorian" },
-      { title: "WandaVision", link: "https://example.com/embed/wandavision" }
-    ]
-  },
-  apple: {
-    name: "Apple TV+",
-    movies: [
-      { title: "CODA", link: "https://example.com/embed/coda" },
-      { title: "Killers of the Flower Moon", link: "https://example.com/embed/killers" },
-      { title: "Napoleon", link: "https://example.com/embed/napoleon" }
-    ],
-    series: [
-      { title: "Foundation", link: "https://example.com/embed/foundation" },
-      { title: "The Morning Show", link: "https://example.com/embed/morning-show" },
-      { title: "Severance", link: "https://example.com/embed/severance" },
-      { title: "Slow Horses", link: "https://example.com/embed/slow-horses" },
-      { title: "Ted Lasso", link: "https://example.com/embed/ted-lasso" }
-    ]
-  }
+const SERVER_DATA = {
+  name: "Catálogo Principal",
+  movies: [
+    { title: "Avatar", year: 2009, links: { drive: "https://drive.google.com/file/d/avatar", telegram: "https://t.me/streamverse/avatar" } },
+    { title: "Vingadores", year: 2012, links: { drive: "https://drive.google.com/file/d/avengers", telegram: "https://t.me/streamverse/avengers" } },
+    { title: "Batman", year: 2022, link: "https://drive.google.com/file/d/batman" },
+    { title: "Blade Runner 2049", year: 2017, links: { drive: "https://drive.google.com/file/d/blade-runner", telegram: "https://t.me/streamverse/blade-runner" } },
+    { title: "Duna", year: 2021, links: { telegram: "https://t.me/streamverse/dune" } },
+    { title: "A Origem", year: 2010, links: { drive: "https://drive.google.com/file/d/inception", telegram: "https://t.me/streamverse/inception" } },
+    { title: "Interestelar", year: 2014, links: { drive: "https://drive.google.com/file/d/interstellar", telegram: "https://t.me/streamverse/interstellar" } }
+  ],
+  series: [
+    { title: "The Walking Dead", year: 2011, links: { drive: "https://drive.google.com/file/d/avatar", telegram: "https://4br.me/oxHlisVH6q" } },
+    { title: "Black Mirror", year: 2011, seasons: 6, link: "https://example.com/embed/black-mirror" },
+    { title: "Breaking Bad", year: 2008, seasons: 5, link: "https://example.com/embed/breaking-bad" },
+    { title: "Stranger Things", year: 2016, seasons: 4, link: "https://example.com/embed/stranger-things" },
+    { title: "The Last of Us", year: 2023, seasons: 2, link: "https://example.com/embed/last-of-us" }
+  ]
 };
 
 /* =========================================================
-   STATE
+   ESTADO
    ========================================================= */
 const state = {
-  view: "platforms",   // platforms | types | titles
-  platform: null,      // key in DATA
-  type: null,          // 'movies' | 'series'
+  view: "types", // Começa direto na seleção de Filmes/Séries
+  type: null,    
   search: ""
 };
 
@@ -578,38 +574,30 @@ const toast = document.getElementById("toast");
 let currentLink = "";
 
 /* =========================================================
-   RENDERING
+   RENDERIZAÇÃO
    ========================================================= */
 function render() {
   app.innerHTML = "";
   renderBreadcrumb();
   toggleSearch();
 
-  if (state.view === "platforms") return renderPlatforms();
   if (state.view === "types") return renderTypes();
   if (state.view === "titles") return renderTitles();
 }
 
 function renderBreadcrumb() {
   const parts = [];
-  parts.push(`<span class="crumb" data-nav="platforms">Início</span>`);
-  if (state.platform) {
-    parts.push(`<span class="sep">/</span>`);
-    const isLeaf = state.view === "types";
-    parts.push(isLeaf
-      ? `<span class="current">${DATA[state.platform].name}</span>`
-      : `<span class="crumb" data-nav="types">${DATA[state.platform].name}</span>`);
-  }
+  parts.push(`<span class="crumb" data-nav="types">Início</span>`);
+  
   if (state.type) {
     parts.push(`<span class="sep">/</span>`);
     parts.push(`<span class="current">${state.type === "movies" ? "Filmes" : "Séries"}</span>`);
   }
+  
   breadcrumb.innerHTML = parts.join("");
   breadcrumb.querySelectorAll(".crumb").forEach(el => {
     el.addEventListener("click", () => {
-      const nav = el.dataset.nav;
-      if (nav === "platforms") goHome();
-      else if (nav === "types") goTypes(state.platform);
+      goHome();
     });
   });
 }
@@ -624,76 +612,43 @@ function toggleSearch() {
   }
 }
 
-function renderPlatforms() {
-  const view = document.createElement("div");
-  view.className = "view";
-  view.innerHTML = `
-    <h1 class="page-title">Escolha a plataforma</h1>
-    <p class="page-subtitle">Diversos conteúdos para você!</p>
-    <div class="platform-list" id="platformList"></div>
-  `;
-  app.appendChild(view);
-
-  const list = view.querySelector("#platformList");
-  Object.entries(DATA).forEach(([key, plat]) => {
-    const total = plat.movies.length + plat.series.length;
-    const btn = document.createElement("button");
-    btn.className = "platform-card";
-    btn.innerHTML = `
-      <div>
-        <div class="name">${plat.name}</div>
-        <div class="meta">${plat.movies.length} filmes · ${plat.series.length} séries</div>
-      </div>
-      <span class="arrow" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-      </span>
-    `;
-    btn.addEventListener("click", () => goTypes(key));
-    list.appendChild(btn);
-  });
-}
-
 function renderTypes() {
-  const plat = DATA[state.platform];
   const view = document.createElement("div");
   view.className = "view";
   view.innerHTML = `
-    <button class="back-btn" id="backBtn">← Voltar</button>
-    <h1 class="page-title">${plat.name}</h1>
-    <p class="page-subtitle">O que você gostaria de assistir?</p>
+    <h1 class="page-title">Bem-vindo ao Arquivo</h1>
+    <p class="page-subtitle">O que você gostaria de assistir hoje?</p>
     <div class="type-list">
       <button class="type-card" data-type="movies">
         <div class="label">Filmes</div>
-        <div class="count">${plat.movies.length} títulos</div>
+        <div class="count">${SERVER_DATA.movies.length} títulos</div>
       </button>
       <button class="type-card" data-type="series">
         <div class="label">Séries</div>
-        <div class="count">${plat.series.length} títulos</div>
+        <div class="count">${SERVER_DATA.series.length} títulos</div>
       </button>
     </div>
   `;
   app.appendChild(view);
 
-  view.querySelector("#backBtn").addEventListener("click", goHome);
   view.querySelectorAll(".type-card").forEach(card => {
-    card.addEventListener("click", () => goTitles(state.platform, card.dataset.type));
+    card.addEventListener("click", () => goTitles(card.dataset.type));
   });
 }
 
 function renderTitles() {
-  const plat = DATA[state.platform];
-  const items = plat[state.type] || [];
+  const items = SERVER_DATA[state.type] || [];
   const view = document.createElement("div");
   view.className = "view";
   view.innerHTML = `
     <button class="back-btn" id="backBtn">← Voltar</button>
-    <h1 class="page-title">${plat.name} — ${state.type === "movies" ? "Filmes" : "Séries"}</h1>
-    <p class="page-subtitle">${items.length} título${items.length === 1 ? "" : "s"} disponíveis.</p>
+    <h1 class="page-title">${state.type === "movies" ? "Filmes" : "Séries"}</h1>
+    <p class="page-subtitle">${items.length} título${items.length === 1 ? "" : "s"} encontrados no servidor.</p>
     <div id="titleArea"></div>
   `;
   app.appendChild(view);
 
-  view.querySelector("#backBtn").addEventListener("click", () => goTypes(state.platform));
+  view.querySelector("#backBtn").addEventListener("click", goHome);
   renderTitleList(items);
 }
 
@@ -711,13 +666,12 @@ function renderTitleList(items) {
     area.innerHTML = `
       <div class="empty-state">
         <div class="icon">∅</div>
-        <p>No titles match "<strong>${escapeHtml(state.search)}</strong>".</p>
+        <p>Nenhum título corresponde a "<strong>${escapeHtml(state.search)}</strong>".</p>
       </div>
     `;
     return;
   }
 
-  // Group by first letter
   const groups = {};
   filtered.forEach(item => {
     const ch = item.title.charAt(0).toUpperCase();
@@ -729,112 +683,135 @@ function renderTitleList(items) {
   const letters = Object.keys(groups).sort();
   area.innerHTML = letters.map(letter => `
     <section class="letter-group">
-      <h2 class="letter-heading">${letter}</h2>
+      <h2 class="letter-heading">
+        <span>${letter}</span>
+        <span class="count-badge">${groups[letter].length}</span>
+      </h2>
       <div class="titles">
-        ${groups[letter].map(item => `
-          <button class="title-item" data-link="${encodeURIComponent(item.link)}" data-title="${escapeAttr(item.title)}">
-            ${escapeHtml(item.title)}
+        ${groups[letter].map(item => {
+          const idx = filtered.indexOf(item);
+          const metaParts = [];
+          if (item.year) metaParts.push(`<span>${item.year}</span>`);
+          if (typeof item.seasons === "number") {
+            metaParts.push(`<span class="dot"></span>`);
+            metaParts.push(`<span>${item.seasons} temporada${item.seasons === 1 ? "" : "s"}</span>`);
+          }
+          const metaHtml = metaParts.length
+            ? `<span class="t-meta">${metaParts.join("")}</span>`
+            : "";
+          return `
+          <button class="title-item" data-idx="${idx}">
+            <span class="t-name">${escapeHtml(item.title)}</span>
+            ${metaHtml}
           </button>
-        `).join("")}
+        `;
+        }).join("")}
       </div>
     </section>
   `).join("");
 
   area.querySelectorAll(".title-item").forEach(btn => {
     btn.addEventListener("click", () => {
-      openModal(btn.dataset.title, decodeURIComponent(btn.dataset.link));
+      const item = filtered[parseInt(btn.dataset.idx, 10)];
+      if (item) handleTitleClick(item);
     });
   });
 }
 
 /* =========================================================
-   NAVIGATION
+   LÓGICA DE LINKS E MODAIS
    ========================================================= */
+function getSources(item) {
+  const out = [];
+  if (item && item.links) {
+    if (item.links.drive) out.push({ kind: "drive", url: item.links.drive });
+    if (item.links.telegram) out.push({ kind: "telegram", url: item.links.telegram });
+  }
+  if (item && item.link && out.length === 0) {
+    out.push({ kind: "drive", url: item.link });
+  }
+  return out;
+}
+
+function handleTitleClick(item) {
+  const sources = getSources(item);
+  if (sources.length === 0) return;
+  if (sources.length === 1) {
+    window.open(sources[0].url, "_blank", "noopener,noreferrer");
+    return;
+  }
+  openSourceModal(item, sources);
+}
+
 function goHome() {
-  state.view = "platforms";
-  state.platform = null;
+  state.view = "types";
   state.type = null;
   state.search = "";
   render();
 }
-function goTypes(platformKey) {
-  state.view = "types";
-  state.platform = platformKey;
-  state.type = null;
-  render();
-}
-function goTitles(platformKey, type) {
+function goTitles(type) {
   state.view = "titles";
-  state.platform = platformKey;
   state.type = type;
   render();
 }
 
-/* =========================================================
-   MODAL
-   ========================================================= */
-function openModal(title, link) {
-  currentLink = link;
-  modalTitle.textContent = title;
-  player.src = link;
-  modal.classList.add("open");
+/* MODAL DE SELEÇÃO DE FONTE */
+const sourceModal = document.getElementById("sourceModal");
+const sourceTitleEl = document.getElementById("sourceTitle");
+const sourceDriveBtn = document.getElementById("sourceDrive");
+const sourceTelegramBtn = document.getElementById("sourceTelegram");
+const sourceCancelBtn = document.getElementById("sourceCancel");
+
+let activeSources = { drive: null, telegram: null };
+
+function openSourceModal(item, sources) {
+  activeSources = { drive: null, telegram: null };
+  sources.forEach(s => { activeSources[s.kind] = s.url; });
+  sourceTitleEl.textContent = item.title;
+  sourceDriveBtn.style.display = activeSources.drive ? "" : "none";
+  sourceTelegramBtn.style.display = activeSources.telegram ? "" : "none";
+  sourceModal.classList.add("open");
   document.body.classList.add("modal-open");
 }
-function closeModal() {
-  modal.classList.remove("open");
-  player.src = "";          // stops video
+function closeSourceModal() {
+  sourceModal.classList.remove("remove");
+  sourceModal.classList.remove("open");
   document.body.classList.remove("modal-open");
-  currentLink = "";
-  copyBtn.classList.remove("copied");
 }
 
+sourceDriveBtn.addEventListener("click", () => {
+  if (activeSources.drive) window.open(activeSources.drive, "_blank");
+  closeSourceModal();
+});
+sourceTelegramBtn.addEventListener("click", () => {
+  if (activeSources.telegram) window.open(activeSources.telegram, "_blank");
+  closeSourceModal();
+});
+sourceCancelBtn.addEventListener("click", closeSourceModal);
+
+/* PLAYER MODAL (OPCIONAL SE USAR EMBED) */
+function closeModal() {
+  modal.classList.remove("open");
+  player.src = "";
+  document.body.classList.remove("modal-open");
+}
 closeBtn.addEventListener("click", closeModal);
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) closeModal();
-});
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
-});
 
-copyBtn.addEventListener("click", async () => {
-  if (!currentLink) return;
-  try {
-    await navigator.clipboard.writeText(currentLink);
-  } catch {
-    const ta = document.createElement("textarea");
-    ta.value = currentLink;
-    document.body.appendChild(ta);
-    ta.select();
-    try { document.execCommand("copy"); } catch {}
-    document.body.removeChild(ta);
-  }
-  copyBtn.classList.add("copied");
-  showToast("Link copied to clipboard");
-  setTimeout(() => copyBtn.classList.remove("copied"), 1500);
-});
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
+/* BUSCA */
 searchInput.addEventListener("input", (e) => {
   state.search = e.target.value;
   if (state.view === "titles") {
-    const items = DATA[state.platform][state.type] || [];
-    renderTitleList(items);
+    renderTitleList(SERVER_DATA[state.type]);
   }
 });
 
 logo.addEventListener("click", goHome);
 
-/* =========================================================
-   UTILITIES
-   ========================================================= */
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, m => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[m]));
 }
-function escapeAttr(s) { return escapeHtml(s); }
 
 let toastTimer;
 function showToast(msg) {
@@ -844,9 +821,6 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
 }
 
-/* =========================================================
-   INIT
-   ========================================================= */
 render();
 </script>
 </body>
